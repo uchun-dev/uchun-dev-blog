@@ -172,9 +172,9 @@ Result는 return 하려고 하면 **'kotlin.Result' cannot be used as a return t
 다만 위의 stackoverflow 답변에 있는 내용 대로 왜 막아두었는지 [여기](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#limitations)와 [여기](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#future-advancements)에 잘 설명되어 있습니다.
 
 #### stackoverflow 및 관련 자료 링크
-- [https://stackoverflow.com/questions/52631827/why-cant-kotlin-result-be-used-as-a-return-type](https://stackoverflow.com/questions/52631827/why-cant-kotlin-result-be-used-as-a-return-type)
-- [https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#limitations](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#limitations)
-- [https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#future-advancements](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#future-advancements)
+[https://stackoverflow.com/questions/52631827/why-cant-kotlin-result-be-used-as-a-return-type](https://stackoverflow.com/questions/52631827/why-cant-kotlin-result-be-used-as-a-return-type)<br>
+[https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#limitations](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#limitations)<br>
+[https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#future-advancements](https://github.com/Kotlin/KEEP/blob/master/proposals/stdlib/result.md#future-advancements)
 
 #### 글 작성시 참고 한 글
-- [https://ahsensaeed.com/functional-style-error-handling-kotlin-runcatching-mapcatching/](https://ahsensaeed.com/functional-style-error-handling-kotlin-runcatching-mapcatching/)
+[https://ahsensaeed.com/functional-style-error-handling-kotlin-runcatching-mapcatching/](https://ahsensaeed.com/functional-style-error-handling-kotlin-runcatching-mapcatching/)
