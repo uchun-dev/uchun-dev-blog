@@ -3,7 +3,8 @@ layout: post
 title:  "runCatching을 이용한 kotlin에서 예외 처리 방법."
 author: uchun
 categories: [ kotlin, exception ]
-image: _covers/football.jpg
+image: assets/covers/football.jpg
+featured: true
 ---
 
 exception이 발생할 수 있는 상황에서 try-catch를 이용해서 exception을 처리할 수 있습니다.<br>
