@@ -7,7 +7,6 @@ image: assets/covers/football.jpg
 featured: true
 ---
 
-exception이 발생할 수 있는 상황에서 try-catch를 이용해서 exception을 처리할 수 있습니다.<br>
 kotlin 1.3부터는 exception이 발생할 수 있는 상황을 처리하기 위해 runCatching이라는 inline function을 제공하고 있습니다.
 
 설명에 앞서 아래와 같이 랜덤하게 과일 이름을 출력하는 함수가 있습니다.
