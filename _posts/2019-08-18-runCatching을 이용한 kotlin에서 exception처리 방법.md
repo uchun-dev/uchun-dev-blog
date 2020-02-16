@@ -4,6 +4,8 @@ title:  "runCatching을 이용한 kotlin에서 exception처리 방법."
 author: uchun
 categories: [ kotlin, exception ]
 image: assets/covers/football.jpg
+image_description: "photo by Keithjj on pixabay"
+image_source_url: "https://pixabay.com/photos/football-players-action-game-1579827/"
 featured: true
 ---
 
