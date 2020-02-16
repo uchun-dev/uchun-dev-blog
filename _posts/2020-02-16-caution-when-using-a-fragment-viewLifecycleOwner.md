@@ -204,7 +204,7 @@ viewModel.message.observe(viewLifecycleOwner, Observer {
 ```kotlin
 viewModel.message.observe(viewLifecycleOwner) {
     messageView.text = it
-})
+}
 ```
 
 이렇게 람다식 으로 표현가능하게 해주는 간단하지만 편리한 extension 입니다.
@@ -216,7 +216,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.message.observe(this) {
         messageView.text = it
-    })
+    }
 }
 ```
 
