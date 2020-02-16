@@ -1,7 +1,7 @@
-/* 
-Template Name: Mediumish 
-Copyright: Sal, WowThemes.net, https://www.wowthemes.net 
-License: https://www.wowthemes.net/freebies-license/ 
+/*
+Template Name: Mediumish
+Copyright: Sal, WowThemes.net, https://www.wowthemes.net
+License: https://www.wowthemes.net/freebies-license/
 */
 .mainheading {
     padding: 1rem 0rem;
@@ -347,6 +347,27 @@ blockquote {
 .featured-image {
     display: block;
     margin-bottom: 1.5rem;
+}
+
+.featured-image-with-desc {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.featured-image-desc {
+    display: block;
+    margin-bottom: 1.5rem;
+    color: rgba(0, 0, 0, .44);
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.featured-image-desc a {
+    color: rgba(0, 0, 0, .44);
+}
+
+.featured-image-desc a:hover {
+    color: rgba(0, 0, 0, .55);
 }
 
 .share {
