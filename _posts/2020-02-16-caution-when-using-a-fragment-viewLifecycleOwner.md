@@ -235,7 +235,7 @@ extension function 을 쓰지 않으면 되는 상황이지만 람다식이 주�
 아직은 확실히 어떤 방법이 좋다고 말하기 어렵다고 생각합니다.<br>
 계속해서 `Fragment` 의 발전되는 모습을 기대해 봅니다.
 
---- 2020년 2월 20일 추가 ---
+--- 2020년 2월 20일 추가 ---<br>
 2020년 2월 19일 `Fragment 1.2.2` 버전이 릴리즈 되었습니다.<br>
-위에서 이야기 한 Lint 이슈 수정사항이 반영되었습니다.
+위에서 이야기 한 Lint 이슈 수정사항이 반영되었습니다.<br>
 [https://developer.android.com/.../androidx/releases/fragment](https://developer.android.com/.../androidx/releases/fragment)
