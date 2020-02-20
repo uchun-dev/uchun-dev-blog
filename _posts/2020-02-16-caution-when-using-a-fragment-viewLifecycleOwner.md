@@ -238,4 +238,4 @@ extension function 을 쓰지 않으면 되는 상황이지만 람다식이 주�
 --- 2020년 2월 20일 추가 ---<br>
 2020년 2월 19일 `Fragment 1.2.2` 버전이 릴리즈 되었습니다.<br>
 위에서 이야기 한 Lint 이슈 수정사항이 반영되었습니다.<br>
-[https://developer.android.com/.../androidx/releases/fragment](https://developer.android.com/.../androidx/releases/fragment)
+[https://developer.android.com/jetpack/androidx/releases/fragment](https://developer.android.com/jetpack/androidx/releases/fragment)
