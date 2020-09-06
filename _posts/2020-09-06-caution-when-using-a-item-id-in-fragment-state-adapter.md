@@ -12,22 +12,22 @@ featured: true
 
 이 글은 `ViewPager2` 에서 `FragmentStateAdapter` 를 쓰면서 경험한 간단한 문제와 원인을 찾아본 경험을 공유합니다. 또한 원인을 찾아보면서 알게 된 내용을 정리하였습니다. (코드 내용을 설명한 글이라 코드를 직접 보는 편을 추천합니다)
 
-이 글은 ViewPager2 1.0.0 기반으로 작성되었습니다.
+_이 글은 ViewPager2 1.0.0 기반으로 작성되었습니다._
 
-
+#  
 ### 다루지 않을 내용
 
 - `ViewPager2` 는 이미 설명된 글이 많이 있어 여기서는 다루지 않겠습니다.
 - `Fragment` 와 `FragmentManager` 에 대해서 다루지 않습니다.
 - `ViewPager` (ViewPager1)에 대해서도 다루지 않습니다.
 
-
+#  
 ### 이 글에서 다룰 내용
 
 - `ViewPager2`에서 `FragmentStateAdapter`를 사용하면서 겪은 간단한 문제 및 해결 방법에 대해서 다룹니다.
 - 문제의 원인을 알아보면서 살펴본 `FragmentStateAdapter` 에서 Fragment 가  추가 및 삭제되는 과정 중 문제와 연관된 부분을 간단히 정리해 보았습니다.
 
-
+#  
 ### 어느 날 만난 (간단한) 문제
 
 각 page 별 id 가 필요한 화면이 있었습니다. 그래서 `getItemId()` 를 override 해서 해당 page 의 id 를 제공하였습니다.  
