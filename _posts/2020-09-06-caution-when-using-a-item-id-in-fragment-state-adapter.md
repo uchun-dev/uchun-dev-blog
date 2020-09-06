@@ -14,20 +14,20 @@ featured: true
 
 _이 글은 ViewPager2 1.0.0 기반으로 작성되었습니다._
 
-#  
+---
 ### 다루지 않을 내용
 
 - `ViewPager2` 는 이미 설명된 글이 많이 있어 여기서는 다루지 않겠습니다.
 - `Fragment` 와 `FragmentManager` 에 대해서 다루지 않습니다.
 - `ViewPager` (ViewPager1)에 대해서도 다루지 않습니다.
 
-#  
+---
 ### 이 글에서 다룰 내용
 
 - `ViewPager2`에서 `FragmentStateAdapter`를 사용하면서 겪은 간단한 문제 및 해결 방법에 대해서 다룹니다.
 - 문제의 원인을 알아보면서 살펴본 `FragmentStateAdapter` 에서 Fragment 가  추가 및 삭제되는 과정 중 문제와 연관된 부분을 간단히 정리해 보았습니다.
 
-#  
+---
 ### 어느 날 만난 (간단한) 문제
 
 각 page 별 id 가 필요한 화면이 있었습니다. 그래서 `getItemId()` 를 override 해서 해당 page 의 id 를 제공하였습니다.  
@@ -65,13 +65,13 @@ FragmentStateAdapter 의 소스의 `getItemId()` 에는 아래와 같은 주석�
 
 추가로 호기심이 발동하여 이전의 ViewPager 에서 사용되는 `FragmentStatePagerAdapter`를 간략히 살펴보니 `FragmentStateAdapter` 와 유사한 형태 입니다만 RecyclerView의 Adapter와 동작 방식이 달라 이와 같은 문제는 발생하지 않을 것으로 보입니다.
 
-
+---
 ### FragmentStateAdapter 에서 Fragment 는 언제, 어떻게 생성되며 제거되는가?
 
 문제는 해결되었지만 아쉬운 느낌이어서 조금 더 보기로 했습니다.  
 FragmentStateAdapter 는 RecyclerView.Adapter 를 상속받습니다. 그래서 이번 문제의 원인이 된 onCreateView(), onBindViewHolder() 과정에서 발생하는 일들만 간단히 살펴보겠습니다.
 
-
+---
 ### onCreateViewHolder
 
 ```java
@@ -87,7 +87,7 @@ public final FragmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, in
 
 나중에 이 container 에 fragment 의 view가 add 되게 됩니다.
 
-
+---
 ### onBindViewHolder
 
 ```java
@@ -144,7 +144,7 @@ itemForViewHolder() 는 viewHolderId 에 매칭 된 itemId 를 찾아주며, bin
 
 FragmentStateAdapter 에서 `getItemId()` 는 기본적으로 단순 position 을 그대로 return 하고 `containsItem()` 은 0 ≤ itemId < itemsize 만 체크하고 있습니다. 그래서 `getItemId()` 를 override 시 `containsItem()` 을 필히 override 해서 구현해 주어야 합니다.
 
-
+---
 ### ensureFragment
 
 ```java
@@ -163,20 +163,20 @@ ensureFragment() 는 해당 위치의 itemId 를 기반으로 mFragments 에 해
 
 binding 하기 전 해당 Fragment 가 준비되어있는지 확인해주는 역할을 합니다.
 
-
+---
 ### 다시 onBindViewHolder 로 돌아와서
 
 그리고 viewHolder 의 container 에 addOnLayoutChangeListener() 를 등록해 해당 이벤트 발생 시 한 번만 placeFragmentInViewHolder() 로 이어지게 해 줍니다.
 
 하지만 이 작업은 해당 이벤트 발생 시 이뤄질 것이라 그 아래에 있는 `gcFragments()` 가 먼저 호출되게 될 것입니다.
 
-
+---
 ### gcFragments 에서는
 
 mFragment 로 있는 id 중 `containsItem()` 기준에 부합하지 않으면 removeFragment()를 이용하여 정리합니다. 이름 그대로의 기능을 한다고 볼 수 있습니다.  
 즉 여기서 getItemId() 와 containsItem() 가 매칭 되지 않으면 원치 않게 Fragment 가 정리되게 됩니다.
 
-
+---
 ### placeFragmentInViewHolder
 
 위에서 본 ensureFragment() 과정에서 준비된 Fragment 를 mFragments 에서 가져와 getView() 를 통해 view 를 얻은 후 아래의 조건에 맞춰 container(위에서 만든 `FragmentViewHolder.getContainer()`) 에 add 하게 됩니다.
@@ -202,7 +202,7 @@ combinations:
 
 gcFragments() 에서 원치 않게 제거 된 Fragment 를 여기서 쓰려고 하면 문제가 발생하게 됩니다. 그 외 illegal state 한 부분에서도 예외가 발생하게 됩니다.
 
-
+---
 ### removeFragment
 
 ```java
@@ -246,7 +246,7 @@ itemId 기반으로 `mFragments` 에 있는 Fragment 를 지우고, 지우면서
 
 내용에서 보시는 것 과 같이. `containsItem()` 를 구현해두지 않으면 `mSavedStates` 에 put 되지 않는 것을 알 수 있습니다.
 
-
+---
 ### 정리하며
 
 앞에서 본 것과 같이 `FragmentStateAdapter` 를 상속받아 Adapter 를 만들 때 `getItemId()` 만 override 하고 `containsItem()` 를 override 하지 않으면
