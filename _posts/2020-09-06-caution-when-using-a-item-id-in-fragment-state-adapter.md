@@ -133,7 +133,7 @@ public final void onBindViewHolder(final @NonNull FragmentViewHolder holder, int
 - holder.getItemId() 를 통해서 얻어오며
 - holder의 itemId 는  RecyclerView.Adapter 의 mHasStableIds 가 true 일 때 bindViewHolder 타이밍에 getItemId() 을 통해서 설정됩니다.
 - 그리고 FragmentViewHolder 는 생성자에서 setHasStableIds 를 true 로 세팅하고 있습니다.
-- 위의 내용으로 보아 itemId == RecyclerView.Adapter 의 getItemId() 를 말합니다.
+- 위의 내용으로 보아 itemId 는 RecyclerView.Adapter 의 getItemId() 를 말합니다.
 
 `viewHolderId` 는  
 - `FragmentViewHolder` 의 container 의 id 이며
@@ -172,6 +172,40 @@ binding 하기 전 해당 Fragment 가 준비되어있는지 확인해주는 역
 
 ---
 ### gcFragments 에서는
+
+```java
+void gcFragments() {
+    if (!mHasStaleFragments || shouldDelayFragmentTransactions()) {
+        return;
+    }
+
+    // Remove Fragments for items that are no longer part of the data-set
+    Set<Long> toRemove = new ArraySet<>();
+    for (int ix = 0; ix < mFragments.size(); ix++) {
+        long itemId = mFragments.keyAt(ix);
+        if (!containsItem(itemId)) {
+            toRemove.add(itemId);
+            mItemIdToViewHolder.remove(itemId); // in case they're still bound
+        }
+    }
+
+    // Remove Fragments that are not bound anywhere -- pending a grace period
+    if (!mIsInGracePeriod) {
+        mHasStaleFragments = false; // we've executed all GC checks
+
+        for (int ix = 0; ix < mFragments.size(); ix++) {
+            long itemId = mFragments.keyAt(ix);
+            if (!isFragmentViewBound(itemId)) {
+                toRemove.add(itemId);
+            }
+        }
+    }
+
+    for (Long itemId : toRemove) {
+        removeFragment(itemId);
+    }
+}
+```
 
 mFragment 로 있는 id 중 `containsItem()` 기준에 부합하지 않으면 removeFragment()를 이용하여 정리합니다. 이름 그대로의 기능을 한다고 볼 수 있습니다.  
 즉 여기서 getItemId() 와 containsItem() 가 매칭 되지 않으면 원치 않게 Fragment 가 정리되게 됩니다.
