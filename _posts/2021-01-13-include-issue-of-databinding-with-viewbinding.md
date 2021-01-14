@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "FragmentStateAdapter 에서 itemId 를 다룰 때 주의할 점"
+title:  "DataBinding 과 레이아웃에서 include tag 를 사용 중, ViewBinding 을 사용하면 수정해야 할 사항"
 author: uchun
 categories: [ DataBinding, ViewBinding ]
 image: assets/covers/binding.jpg
@@ -43,7 +43,7 @@ binding.messageView.visibiliity = View.VISIBLE
 
 ### 이와 같은 상황에서 ViewBinding 을 활성화하면 몇 가지 추가 작업이 필요합니다.
 
-1. 기존의 DataBinding 으로 사용하고 방식에서 에서 include 에 id 를 부여한 경우 view 로 접근 가능했으나 ViewBinding 을 활성화하면 ViewBinding 으로 취급되어 binding.layoutId 가 아닌 binding.layoutId.root 로 접근해야 합니다.
+기존의 DataBinding 으로 사용하고 방식에서 에서 include 에 id 를 부여한 경우 view 로 접근 가능했으나 ViewBinding 을 활성화하면 ViewBinding 으로 취급되어 binding.layoutId 가 아닌 binding.layoutId.root 로 접근해야 합니다.
 ```kotlin
 // before
 binding.messageView.visibiliity = View.VISIBLE
@@ -51,17 +51,16 @@ binding.messageView.visibiliity = View.VISIBLE
 binding.messageView.root.visibiliity = View.VISIBLE
 ```
 
-2. 만약 프로젝트의 Android Gradle Plugin(이하 AGP)의 버전이 4.1 미만이라면
+만약 프로젝트의 Android Gradle Plugin(이하 AGP)의 버전이 4.1 미만이라면 아래와 같은 에러를 볼 수 있습니다.
 ```
 error: incompatible types: MessageViewBinding cannot be converted to ViewDataBinding
 setContainedBinding(this.messageView);
 ```
-와 같은 에러를 볼 수 있습니다.
 
+### 위의 에러를 해결하기 위해서는 2가지 방법이 있습니다.
 
-### 위의 2번의 에러를 해결하기 위해서는 2가지 방법이 있습니다.
+DataBinding 을 위해 layout tag 를 사용하는 레이아웃 안에서 include 가 사용된 경우 include 할 layout 을 layout tag 로 감싸줘서 해결할 수 있습니다.
 
-1. DataBinding 을 위해 layout tag 를 사용하는 레이아웃 안에서 include 가 사용된 경우 include 할 layout 을 layout tag 로 감싸줘서 해결할 수 있습니다.
 ```xml
 <!-- before / message_view.xml -->
 <XXXLayout>
@@ -76,6 +75,6 @@ setContainedBinding(this.messageView);
 </layout>
 ```
 
-2. 다른 방법은 AGP 를 4.1 이상으로 올리면 레이아웃 수정 없이 문제가 해결됩니다. AGP 변경 사항에 따라 추가로 수정이 필요할 수 있으며 자세한 내용은 공식 사이트에서 확인 가능합니다.
+다른 방법은 AGP 를 4.1 이상으로 올리면 레이아웃 수정 없이 문제가 해결됩니다. AGP 변경 사항에 따라 추가로 수정이 필요할 수 있으며 자세한 내용은 공식 사이트에서 확인 가능합니다.
   - 영문 : [https://developer.android.com/studio/releases/gradle-plugin](https://developer.android.com/studio/releases/gradle-plugin)
   - 한글 : [https://developer.android.com/studio/releases/gradle-plugin?hl=ko](https://developer.android.com/studio/releases/gradle-plugin?hl=ko)
